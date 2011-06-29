@@ -7,6 +7,9 @@ using System.Data.OleDb;
 using System.Text;
 using System.Windows.Forms;
 
+// Note: This is bundle the associated SalesLogix form plugin in the bundle with the .NET extension
+[assembly: Sage.SalesLogix.NetExtensions.Deployment.DeployInsertPlugin(Sage.SalesLogix.NetExtensions.Deployment.PluginType.ActiveForm, "Account", "Extension Control Sample")]
+
 namespace SampleExtension
 {
     public partial class UserControl1 : FX.SalesLogix.NetExtensionsHelper.SalesLogixControl
