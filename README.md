@@ -38,6 +38,6 @@ Sub AXFormChange(Sender)
     ext.CurrentID = Form.CurrentID
 End Sub</pre>
 
-Using the provided sample, you'll end up with the following result in SalesLogix
+Using the provided sample, you'll end up with the following result in SalesLogix (The DataGrid on this tab is a .NET DataGrid control)
 
 <img src="http://content.screencast.com/users/RyanFarley/folders/Jing/media/acd5f0d9-6aec-44d4-8a2d-3499d11bdae2/SalesLogix_Extension_Sample.png">
