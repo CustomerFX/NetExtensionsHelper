@@ -31,6 +31,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Sage.SalesLogix.NetExtensions.Core, Version=7.5.1.1742, Culture=neutral, PublicKeyToken=e23619fa05908439, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\References\SalesLogix\Sage.SalesLogix.NetExtensions.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Sage.SalesLogix.NetExtensions.Framework, Version=7.5.1.1742, Culture=neutral, PublicKeyToken=e23619fa05908439, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\References\SalesLogix\Sage.SalesLogix.NetExtensions.Framework.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />

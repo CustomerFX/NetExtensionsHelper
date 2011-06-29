@@ -18,7 +18,7 @@ namespace SlxExtensionControl1
 
         private void UserControl1_SalesLogixRecordChanged(string RecordID)
         {
-            using (OleDbConnection conn = new OleDbConnection(SlxApplication.ConnectionString))
+            using (OleDbConnection conn = new OleDbConnection(this.SlxApplication.ConnectionString))
             {
                 conn.Open();
                 using (OleDbDataAdapter da = new OleDbDataAdapter(string.Format("select lastname as LastName, firstname as FirstName, type as Type from contact where accountid = '{0}'", RecordID), conn))
