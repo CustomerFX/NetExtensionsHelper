@@ -1,8 +1,10 @@
+<h1>.NET Extension Helper</h1>
+
 The .NET Extension Helper is a library that will do all the heavy lifting to embed controls in SalesLogix. All you do is have your UserControl inherit from the FX.SalesLogix.NetExtensionsHelper.SalesLogixControl and then use a script class in SalesLogix to load the control and set the record context.
 
 Your .NET UserControl will look like this:
 
-<code>public partial class UserControl1 : FX.SalesLogix.NetExtensionsHelper.SalesLogixControl
+<pre>public partial class UserControl1 : FX.SalesLogix.NetExtensionsHelper.SalesLogixControl
 {
 	private void UserControl1_SalesLogixRecordChanged(string RecordID)
 	{
@@ -18,11 +20,11 @@ Your .NET UserControl will look like this:
 			}
 		}
 	}
-}</code>
+}</pre>
 
 In SalesLogix, the code for the form will look like this:
 
-<code>'Including Script - System:ExtensionControl Class
+<pre>'Including Script - System:ExtensionControl Class
 option explicit
 
 Dim ext
@@ -34,4 +36,8 @@ End Sub
 
 Sub AXFormChange(Sender)
     ext.CurrentID = Form.CurrentID
-End Sub</code>
+End Sub</pre>
+
+Using the provided sample, you'll end up with the following result in SalesLogix
+
+<img src="http://content.screencast.com/users/RyanFarley/folders/Jing/media/acd5f0d9-6aec-44d4-8a2d-3499d11bdae2/SalesLogix_Extension_Sample.png">
