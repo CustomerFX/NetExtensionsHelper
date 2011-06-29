@@ -1,4 +1,4 @@
-﻿namespace SlxExtensionControl1
+﻿namespace SampleExtension
 {
     partial class UserControl1
     {

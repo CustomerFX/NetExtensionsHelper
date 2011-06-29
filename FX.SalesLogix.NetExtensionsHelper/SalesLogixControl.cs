@@ -70,6 +70,16 @@ namespace FX.SalesLogix.NetExtensionsHelper
             this.SlxApplication = SlxApplication;
         }
 
+		// To initialize: Pass 3 parameters (currently must be in order)
+		// Param 1: The handle/hwnd of the container to embed the control
+		// Param 2: A boolean indicating whether or not to resize the control to fill the container
+		// Param 3: A reference to a callback function, set in SLX using GetRef("FunctionName") where FunctionName accepts two params
+		//          'Sample callback function in VBScript
+		//          Function CallbackFunction(EventName, EventData)
+		//          End Function
+		//--------------------------------------------------------------
+		// To set record context: Pass 1 parameter
+		// Param 1: The ID of the current SLX record
         public object Run(object[] Args)
         {
             if (Args[0] is Int32)
@@ -81,7 +91,7 @@ namespace FX.SalesLogix.NetExtensionsHelper
                 if (Args.Length >= 2) _fillparent = (bool)Args[1];
                 if (_fillparent) ResizeControl(_parent);
 
-                if (Args.Length == 3)
+                if (Args.Length == 3 && Args[2] != null)
                     this.Callback = Args[2];
             }
             else

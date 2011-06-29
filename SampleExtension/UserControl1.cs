@@ -7,7 +7,7 @@ using System.Data.OleDb;
 using System.Text;
 using System.Windows.Forms;
 
-namespace SlxExtensionControl1
+namespace SampleExtension
 {
     public partial class UserControl1 : FX.SalesLogix.NetExtensionsHelper.SalesLogixControl
     {
