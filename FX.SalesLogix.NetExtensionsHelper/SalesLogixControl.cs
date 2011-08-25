@@ -70,10 +70,11 @@ namespace FX.SalesLogix.NetExtensionsHelper
             this.SlxApplication = SlxApplication;
         }
 
-		// To initialize: Pass 3 parameters (currently must be in order)
+		// To initialize: Pass 4 parameters (must be in the following order)
 		// Param 1: The handle/hwnd of the container to embed the control
-		// Param 2: A boolean indicating whether or not to resize the control to fill the container
-		// Param 3: A reference to a callback function, set in SLX using GetRef("FunctionName") where FunctionName accepts two params
+		// Param 2: A boolean indicating whether or not to resize the control to fill the container (default: false)
+		// Param 3: A boolean indicating whether to force the control to embed to the SLX form's parent container tab instead of the form itself
+		// Param 4: A reference to a callback function, set in SLX using GetRef("FunctionName") where FunctionName accepts two params
 		//          'Sample callback function in VBScript
 		//          Function CallbackFunction(EventName, EventData)
 		//          End Function
@@ -86,13 +87,21 @@ namespace FX.SalesLogix.NetExtensionsHelper
             {
                 _parent = new IntPtr((int)Args[0]);
 
+				// Check for force resize mode
+				if (Args.Length >= 3 && (bool)Args[2] == true)
+					_parent = Win32.GetParent(_parent);
+
                 this.Show();
+
+				// embed the extension
                 Win32.SetParent(this.Handle, _parent);
+				// resize to fill the parent container
                 if (Args.Length >= 2) _fillparent = (bool)Args[1];
                 if (_fillparent) ResizeControl(_parent);
 
-                if (Args.Length == 3 && Args[2] != null)
-                    this.Callback = Args[2];
+				// set callback if included
+                if (Args.Length == 4 && Args[3] != null)
+                    this.Callback = Args[3];
             }
             else
             {
@@ -104,6 +113,16 @@ namespace FX.SalesLogix.NetExtensionsHelper
 
             return null;
         }
+
+		public string GetClassName(IntPtr handle)
+		{
+			System.Text.StringBuilder className = new System.Text.StringBuilder(100);
+			int nRet = Win32.GetClassName(handle, className, className.Capacity);
+			if (nRet != 0)
+				return className.ToString();
+			else
+				return string.Empty;
+		}
 
         protected void RaiseSalesLogixCallbackEvent(string EventName, object EventData)
         {
