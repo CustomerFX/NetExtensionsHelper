@@ -1,31 +1,34 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Text;
 using System.Drawing;
-using System.Windows.Forms;
 using System.Reflection;
+using System.Windows.Forms;
+using System.ComponentModel;
 using Sage.SalesLogix.NetExtensions;
+using Sage.SalesLogix.NetExtensions.Licensing;
 using Sage.SalesLogix.NetExtensions.SalesLogix;
 using FX.SalesLogix.NetExtensionsHelper.Utility;
 
 namespace FX.SalesLogix.NetExtensionsHelper
 {
-    public class SalesLogixDialog : System.Windows.Forms.Form, IRunnable
+	[ToolboxBitmap(typeof(Form))]
+    public class SalesLogixDialog : Form, IRunnable
     {
-        public ISlxApplication SlxApplication = null;
-        public object Callback = null;
-        private string _recordid = string.Empty;
+		public ExtensionProperties ExtensionProperties = null;
+		public ISlxApplication SlxApplication = null;
+		public ILicenseKeyManager LicenseKeyManager = null;
 
         public SalesLogixDialog()
         {
             InitializeComponent();
         }
 
-        public string RecordID
-        {
-            get { return this._recordid; }
-        }
+		public string CurrentID
+		{
+			get
+			{
+				return ExtensionProperties.RecordID; 
+			}
+		}
 
         #region Component Code
 
@@ -73,38 +76,44 @@ namespace FX.SalesLogix.NetExtensionsHelper
 
         #endregion
 
-        public void Initialize(ISlxApplication SlxApplication, Sage.SalesLogix.NetExtensions.Licensing.ILicenseKeyManager LicenseKeyManager)
+        public void Initialize(ISlxApplication SlxApplication, ILicenseKeyManager LicenseKeyManager)
         {
             this.SlxApplication = SlxApplication;
+			this.LicenseKeyManager = LicenseKeyManager;
+
+			this.ExtensionProperties = new ExtensionProperties();
         }
 
+		// To set record context: Pass 1 parameter
+		// Param 1: The ID of the current SLX record
+		// Param 1: An optional reference to a callback function, set in SLX using GetRef("FunctionName") where FunctionName accepts two params
+		//          'Sample callback function in VBScript
+		//          Function CallbackFunction(EventName, EventData)
+		//          End Function
         public object Run(object[] Args)
         {
-            //foreach (object o in Args)
-            //{
-             //   MessageBox.Show("Arg Type: " + o.GetType().ToString());
-            //}
+			ExtensionProperties.SetProperties(Args);
 
-            if (Args.Length > 0) this._recordid = Args[0].ToString();
+			if (ExtensionProperties.RecordID == string.Empty)
+				throw new ApplicationException("Invalid properties passed");
 
-            this.ShowDialog();
-
-            return null;
+			this.ShowDialog();
+			return null;
         }
 
         protected void RaiseSalesLogixCallbackEvent(string EventName, object EventData)
         {
             try
             {
-                if (Callback != null)
+                if (ExtensionProperties.Callback != null)
                 {
-                    Type t = Callback.GetType();
-                    t.InvokeMember("", BindingFlags.InvokeMethod, null, Callback, new object[] { EventName, EventData });
+					Type t = ExtensionProperties.Callback.GetType();
+					t.InvokeMember("", BindingFlags.InvokeMethod, null, ExtensionProperties.Callback, new object[] { EventName, EventData });
                 }
             }
             catch (Exception ex)
             {
-                throw new Exception("An error occurred calling the callback function from the .NET SalesLogix Control. " + ex.Message, ex);
+                throw new Exception("An error occurred calling the callback function from the .NET SalesLogix Dialog. " + ex.Message, ex);
             }
         }
     }

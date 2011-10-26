@@ -73,6 +73,7 @@
     <Compile Include="SalesLogixDialog.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="ExtensionProperties.cs" />
     <Compile Include="Utility\Win32.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

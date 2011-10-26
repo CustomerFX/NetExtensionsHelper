@@ -59,6 +59,16 @@ namespace FX.SalesLogix.NetExtensionsHelper.Utility
                             ^ ((Width << 0x1a) | (Width >> 6))
                             ^ ((Height << 7) | (Height >> 0x19));
             }
+
+			public string GetClassName(IntPtr handle)
+			{
+				var className = new System.Text.StringBuilder(100);
+
+				if (Win32.GetClassName(handle, className, className.Capacity) != 0)
+					return className.ToString();
+				else
+					return string.Empty;
+			}
         }
     }
 }

@@ -19,14 +19,14 @@ namespace SampleExtension
             InitializeComponent();
         }
 
-        private void UserControl1_SalesLogixRecordChanged(string RecordID)
+        private void UserControl1_SalesLogixRecordChanged(string CurrentID)
         {
-            using (OleDbConnection conn = new OleDbConnection(this.SlxApplication.ConnectionString))
+            using (var conn = new OleDbConnection(this.SlxApplication.ConnectionString))
             {
                 conn.Open();
-                using (OleDbDataAdapter da = new OleDbDataAdapter(string.Format("select lastname as LastName, firstname as FirstName, type as Type from contact where accountid = '{0}'", RecordID), conn))
+                using (var da = new OleDbDataAdapter(string.Format("select lastname as LastName, firstname as FirstName, type as Type from contact where accountid = '{0}'", CurrentID), conn))
                 {
-                    DataTable table = new DataTable();
+                    var table = new DataTable();
                     da.Fill(table);
 
                     dataGridView1.DataSource = table;
