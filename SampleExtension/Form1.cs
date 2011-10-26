@@ -21,7 +21,7 @@ namespace SampleExtension
 			using (var conn = new OleDbConnection(this.SlxApplication.ConnectionString))
 			{
 				conn.Open();
-				using (var da = new OleDbDataAdapter(string.Format("select lastname as LastName, firstname as FirstName, type as Type from contact where accountid = '{0}'", this.CurrentID), conn))
+				using (var da = new OleDbDataAdapter(string.Format("select lastname as LastName, firstname as FirstName, type as Type, contactid as ContactID from contact where accountid = '{0}'", this.CurrentID), conn))
 				{
 					var table = new DataTable();
 					da.Fill(table);
@@ -29,6 +29,15 @@ namespace SampleExtension
 					dataGridView1.DataSource = table;
 				}
 			}
+		}
+
+		private void buttonRaiseCallback_Click(object sender, EventArgs e)
+		{
+			// This will raise the callback event in the SalesLogix form and pass it the event name of "SelectedRecord", and the conactid of the selected row
+			if (dataGridView1.SelectedRows.Count > 0)
+				this.RaiseSalesLogixCallbackEvent("SelectedRecord", dataGridView1.SelectedRows[0].Cells[3].Value);
+			else
+				this.RaiseSalesLogixCallbackEvent("SelectedRecord", "");
 		}
 	}
 }

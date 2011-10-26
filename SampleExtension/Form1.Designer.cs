@@ -28,9 +28,10 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
 			this.button1 = new System.Windows.Forms.Button();
 			this.dataGridView1 = new System.Windows.Forms.DataGridView();
+			this.buttonRaiseCallback = new System.Windows.Forms.Button();
 			((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
 			this.SuspendLayout();
 			// 
@@ -49,8 +50,8 @@
 			this.dataGridView1.AllowUserToAddRows = false;
 			this.dataGridView1.AllowUserToDeleteRows = false;
 			this.dataGridView1.AllowUserToOrderColumns = true;
-			dataGridViewCellStyle1.BackColor = System.Drawing.Color.WhiteSmoke;
-			this.dataGridView1.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+			dataGridViewCellStyle3.BackColor = System.Drawing.Color.WhiteSmoke;
+			this.dataGridView1.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle3;
 			this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
 			this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
 			this.dataGridView1.Location = new System.Drawing.Point(8, 8);
@@ -61,10 +62,21 @@
 			this.dataGridView1.Size = new System.Drawing.Size(532, 244);
 			this.dataGridView1.TabIndex = 2;
 			// 
+			// buttonRaiseCallback
+			// 
+			this.buttonRaiseCallback.Location = new System.Drawing.Point(546, 46);
+			this.buttonRaiseCallback.Name = "buttonRaiseCallback";
+			this.buttonRaiseCallback.Size = new System.Drawing.Size(96, 28);
+			this.buttonRaiseCallback.TabIndex = 3;
+			this.buttonRaiseCallback.Text = "Raise Callback";
+			this.buttonRaiseCallback.UseVisualStyleBackColor = true;
+			this.buttonRaiseCallback.Click += new System.EventHandler(this.buttonRaiseCallback_Click);
+			// 
 			// Form1
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.ClientSize = new System.Drawing.Size(647, 264);
+			this.Controls.Add(this.buttonRaiseCallback);
 			this.Controls.Add(this.dataGridView1);
 			this.Controls.Add(this.button1);
 			this.Name = "Form1";
@@ -78,5 +90,6 @@
 
 		private System.Windows.Forms.Button button1;
 		private System.Windows.Forms.DataGridView dataGridView1;
+		private System.Windows.Forms.Button buttonRaiseCallback;
 	}
 }

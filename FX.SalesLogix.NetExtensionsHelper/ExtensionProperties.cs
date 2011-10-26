@@ -41,7 +41,7 @@ namespace FX.SalesLogix.NetExtensionsHelper
 
 				if (Properties.Length >= 2) FillParent = (bool)Properties[1];
 
-				if (Properties.Length == 4 && Properties[3] != null)
+				if (Properties.Length >= 4 && Properties[3] != null)
 					this.Callback = Properties[3];
 			}
 			else
@@ -49,7 +49,7 @@ namespace FX.SalesLogix.NetExtensionsHelper
 				ExtensionState = ExtensionState.SetContext;
 				RecordID = Properties[0].ToString();
 
-				if (Properties.Length == 2 && Properties[1] != null)
+				if (Properties.Length >= 2 && Properties[1] != null)
 					this.Callback = Properties[1];
 			}
 		}

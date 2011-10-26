@@ -76,7 +76,7 @@ namespace FX.SalesLogix.NetExtensionsHelper
 		// Param 1: The handle/hwnd of the container to embed the control
 		// Param 2: A boolean indicating whether or not to resize the control to fill the container (default: false)
 		// Param 3: A boolean indicating whether to force the control to embed to the SLX form's parent container tab instead of the form itself
-		// Param 4: An optional reference to a callback function, set in SLX using GetRef("FunctionName") where FunctionName accepts two params
+		// Param 4: An optional reference to a callback function, set in SLX passing "FunctionName" as a string where FunctionName accepts two params
 		//          'Sample callback function in VBScript
 		//          Function CallbackFunction(EventName, EventData)
 		//          End Function

@@ -86,7 +86,7 @@ namespace FX.SalesLogix.NetExtensionsHelper
 
 		// To set record context: Pass 1 parameter
 		// Param 1: The ID of the current SLX record
-		// Param 1: An optional reference to a callback function, set in SLX using GetRef("FunctionName") where FunctionName accepts two params
+		// Param 2: An optional reference to a callback function, set in SLX passing "FunctionName" as a string where FunctionName accepts two params
 		//          'Sample callback function in VBScript
 		//          Function CallbackFunction(EventName, EventData)
 		//          End Function
