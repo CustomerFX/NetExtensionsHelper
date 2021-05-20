@@ -24,7 +24,7 @@ namespace SampleExtension
             using (var conn = new OleDbConnection(this.SlxApplication.ConnectionString))
             {
                 conn.Open();
-                using (var da = new OleDbDataAdapter(string.Format("select lastname as LastName, firstname as FirstName, type as Type from contact where accountid = '{0}'", CurrentID), conn))
+                using (var da = new OleDbDataAdapter(string.Format("select contactid as ContactID, lastname as LastName, firstname as FirstName, type as Type from contact where accountid = '{0}'", CurrentID), conn))
                 {
                     var table = new DataTable();
                     da.Fill(table);
@@ -32,6 +32,12 @@ namespace SampleExtension
                     dataGridView1.DataSource = table;
                 }
             }
+        }
+
+        private void dataGridView1_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            var contactId = dataGridView1.CurrentRow.Cells[0].Value.ToString();
+            RaiseSalesLogixCallbackEvent("GridRowDoubleClick", contactId);
         }
     }
 }
